@@ -145,14 +145,14 @@ func (c *Client) execute(method string, urlStr string, text string) (interface{}
 	const DEC_RADIX = 10
 	if strings.Contains(urlStr, "/repositories/") {
 		if c.Pagelen != DEFAULT_PAGE_LENGTH {
-			urlObj, err := url.Parse(urlStr)
+			urlObj, err := url.Parse(innerurlStr)
 			if err != nil {
 				return nil, err
 			}
 			q := urlObj.Query()
 			q.Set("pagelen", strconv.FormatUint(c.Pagelen, DEC_RADIX))
 			urlObj.RawQuery = q.Encode()
-			urlStr = urlObj.String()
+			innerurlStr = urlObj.String()
 		}
 	}
 
